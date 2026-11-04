@@ -8,7 +8,7 @@
   <a href="#-características-principales">Características</a> •
   <a href="#-requisitos-previos">Requisitos</a> •
   <a href="#-instalación">Instalación</a> •
-  <a href="#-configuración-del-entorno">Configuración</a> •
+  <a href="#%EF%B8%8F-configuraci%C3%B3n-del-entorno">Configuración</a> •
   <a href="#-uso-y-opciones-de-la-línea-de-comandos">Uso</a>
 </p>
 
