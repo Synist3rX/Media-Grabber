@@ -219,7 +219,13 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# Archivos temporales de pruebas unitarias
+test_downloads_temp/
+.pytest_cache/
+__pycache__/
+
 # Other files
 *.log
 *.txt
-/tests
+*.json
+.vscode
