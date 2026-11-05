@@ -14,7 +14,7 @@
 
 ---
 
-**Media Grabber** es una potente herramienta de interfaz de línea de comandos (CLI) impulsada por `yt-dlp` y `FFmpeg`. Permite simplificar la descarga de videos, listas de reproducción y transmisiones de audio, ofreciendo funciones avanzadas como subtítulos selectivos incrustados, eliminación automática de patrocinadores (SponsorBlock), división por capítulos, compresión de video y caché de sesión inteligente.
+**Media Grabber** es una potente herramienta de interfaz de línea de comandos (CLI) impulsada por `yt-dlp` y `FFmpeg`. Permite simplificar la descarga de videos (YouTube, Facebook, Instagram, etc.), listas de reproducción y transmisiones de audio, ofreciendo funciones avanzadas como subtítulos selectivos incrustados, eliminación automática de patrocinadores (SponsorBlock), división por capítulos, compresión de video y caché de sesión inteligente.
 
 ---
 
@@ -28,6 +28,23 @@
 - **Gestión Inteligente de Sesión**: Guarda en caché las descargas interrumpidas para reanudarlas más tarde, registra historial y genera un archivo de auditoría `failed_urls.txt` para enlaces fallidos.
 - **Control de Velocidad (`-r`)**: Limita el ancho de banda para evitar saturar la conexión o sufrir bloqueos del servidor.
 - **Notificaciones de Escritorio**: Envía alertas nativas del sistema operativo al finalizar las tareas (`-n`).
+
+---
+
+## 🌐 Plataformas Soportadas
+
+**Media Grabber** está respaldado por el motor de **yt-dlp**, lo que le otorga compatibilidad nativa con una enorme variedad de servicios de streaming y redes sociales. Las plataformas principales probadas y soportadas incluyen:
+
+*   **YouTube**: Videos individuales, listas de reproducción completas (`-p`), selección de elementos específicos (`-pi`), división por capítulos (`-sc`) y extracción/incrustación de subtítulos (`-s`).
+*   **Facebook**: Videos públicos y Reels.
+*   **Instagram**: Reels, videos e historias públicas (compatible con autenticación mediante cookies `-c` o `-cf` para contenido restringido).
+*   **Otras plataformas compatibles (vía yt-dlp)**:
+    *   **TikTok** *(sujeto a restricciones y actualizaciones de seguridad de la plataforma)*.
+    *   **Twitch** (videos y clips).
+    *   **Vimeo** y **Dailymotion**.
+    *   **X (Twitter)**.
+    *   **SoundCloud** (ideal para descargas de audio masivas).
+    *   *¡Y más de 1,000 sitios web soportados por el ecosistema de yt-dlp!*
 
 ---
 
