@@ -94,27 +94,28 @@ class TestMediaGrabber(unittest.TestCase):
         self.assertIn("720", format_str)
 
     @patch('grabber.MediaGrabber._run_system_command')
-    def test_compress_video_calls_ffmpeg(self, mock_run_cmd):
+    @patch('os.path.exists', return_value=True)
+    @patch('os.path.getsize', return_value=2048)  # Simulamos un tamaño de archivo válido
+    @patch('os.remove')
+    @patch('os.rename')
+    def test_compress_video_calls_ffmpeg(self, mock_rename, mock_remove, mock_getsize, mock_exists, mock_run_cmd):
         """Asegura que el método de compresión arme el comando FFmpeg correctamente usando el DRY runner."""
-        # Simulamos que el archivo de entrada existe
-        with patch('os.path.exists', return_value=True):
-            # Configuramos el mock para que responda "True" (éxito) al comando
-            mock_run_cmd.return_value = True
-            
-            # Ejecutamos con un archivo simulado
-            self.grabber._compress_video("dummy_video.mp4", crf=30)
-            
-            # Verificamos que el comando enviado a la consola contenía libx264 y el CRF esperado
-            mock_run_cmd.assert_called_once()
-            args, _ = mock_run_cmd.call_args
-            cmd_list = args[0]
-            
-            self.assertIn("-c:v", cmd_list)
-            self.assertIn("libx264", cmd_list)
-            self.assertIn("-crf", cmd_list)
-            self.assertIn("30", cmd_list)
+        mock_run_cmd.return_value = True
+        
+        # Ejecutamos con un archivo simulado
+        self.grabber._compress_video("dummy_video.mp4", crf=30)
+        
+        # Verificamos que el comando enviado a la consola contenía libx264 y el CRF esperado
+        mock_run_cmd.assert_called_once()
+        args, _ = mock_run_cmd.call_args
+        cmd_list = args[0]
+        
+        self.assertIn("-c:v", cmd_list)
+        self.assertIn("libx264", cmd_list)
+        self.assertIn("-crf", cmd_list)
+        self.assertIn("30", cmd_list)
 
 
 if __name__ == '__main__':
-    # python -m unittest test_grabber.py -v
+    # python -m unittest -v
     unittest.main(verbosity=2)
