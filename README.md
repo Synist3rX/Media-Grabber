@@ -163,25 +163,30 @@ python grabber.py "URL_AQUÍ" [OPCIONES]
 ### Argumentos y Banderas Principales
 
 | Bandera Corta | Bandera Larga | Descripción |
-| ---: | :--- | :--- |
-|      | `url` | URL directa del video o audio a descargar. |
-| `-q` | `--quality` | Seleccionar formato de resolución o abrir el menú interactivo. |
-| `-f` | `--file` | Ruta a un archivo de texto con una lista de URLs para procesamiento masivo. |
+| :---: | :--- | :--- |
+| *(Ninguna)* | `url` | URL directa del video o audio a descargar. |
+| `-q` | `--quality` | Formato de resolución o menú interactivo. |
+| `-f` | `--file` | Ruta a un archivo de texto con una lista de URLs para procesamiento por lotes. |
 | `-a` | `--audio` | Descargar solo audio (soporta `mp3`, `m4a`, `wav`, `flac`, `aac`, `opus`). |
 | `-s` | `--subtitles` | Descargar e incrustar subtítulos. Predeterminado a `es` o especifica idiomas como `en`, `pt`, `es,en`, `all`. |
-| `--clean` |    | Elimina el video sin subtítulos tras generar la copia subtitulada (requiere `-s`). |
-| `--compress` |    | Comprime el video resultante con FFmpeg (`libx264`) para reducir su peso. |
-| `-sb` | `--sponsorblock` | Eliminar segmentos de SponsorBlock (patrocinios, auto-promos, interacciones). |
-| `-sc` | `--split-chapters`| Dividir el video automáticamente en archivos independientes por capítulos. |
+| *(Ninguna)* | `--clean` | Elimina el video sin subtítulos tras generar la copia subtitulada (requiere `-s`). |
+| *(Ninguna)* | `--compress` | Comprime el video resultante con FFmpeg (`libx264`) para reducir el tamaño del archivo. |
+| `-sb` | `--sponsorblock` | Eliminar segmentos de SponsorBlock (patrocinios, autopro, interacciones) automáticamente. |
+| `-sc` | `--split-chapters`| Dividir el video automáticamente en archivos independientes basados en los capítulos. |
 | `-p` | `--playlist` | Permitir la descarga de listas de reproducción completas. |
 | `-pi` | `--playlist-items`| Elementos específicos de la playlist a descargar (ej. `1-5`, `1,3,7`). |
-| `-tr` | `--time-range` | Rango de tiempo para recortes (ej. `20-30`, `01:00-02:30`). |
-| `-r` | `--ratelimit` | Tasa máxima de descarga (ej. `500k`, `2m`, `10M`). |
-| `-o` | `--organize` | Organizar automáticamente las descargas en subcarpetas (`Video`, `Audio`, `Playlists`). |
+| `-tr` | `--time-range` | Rango de tiempo para recortes (ej. `20-30`, `01:00-02:30`, `01:00-` o `-02:30`). |
+| `-r` | `--ratelimit` | Tasa máxima de descarga (ej. valor por defecto `10M`, o especifica como `500k`, `2m`). |
+| `-o` | `--organize` | Organizar automáticamente las descargas en subcarpetas de categorías (`Video`, `Audio`, `Playlists`). |
 | `-n` | `--notify` | Enviar una notificación nativa de escritorio al completar la tarea. |
 | `-si` | `--sleep-interval`| Segundos mínimos de pausa entre descargas. |
-| `-b` | `--best` | Modo automático: activa subtítulos (-s), pauzas minimas de descarga (-si 8), límite de tasa (-r), notificaciones (-n), sin cacheo (--no-cache) y limpieza (--clean). |
-| `-v` | `--verbose` | Mostrar la salida detallada de registros nativos de `yt-dlp`. |
+| `-c` | `--cookies` | Extraer cookies del navegador (por defecto: `chrome`). |
+| `-cf` | `--cookie-file` | Ruta a un archivo de texto `cookies.txt`. |
+| `-nc` | `--no-cookies` | Omitir la detección automática de cookies. |
+| `-nh` | `--no-history` | Omitir el registro del historial de descargas en archivos de archivo (*archive*). |
+| *(Ninguna)* | `--no-cache` | Omitir la verificación de caché y el guardado de sesión. |
+| `-b` | `--best` | Modo automático: activa subtítulos (`-s`), limpieza (`--clean`), notificación (`-n`), sin caché (`--no-cache`), límite de tasa (`-r`), e intervalo de espera (`-si 5`). |
+| `-v` | `--verbose` | Mostrar la salida de registros nativos de `yt-dlp`. |
 
 ### Ejemplos de Uso
 

@@ -813,9 +813,9 @@ class MediaGrabber:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Python Stream Media Grabber")
     parser.add_argument("url", nargs="?", default=None, help="Direct URL of the video/audio to download")
+    parser.add_argument("-q", "--quality", nargs="?", const="interactive", default=None, help="Resolution format or interactive menu")
     parser.add_argument("-f", "--file", default=None, help="Path to a text file containing a list of URLs")
     parser.add_argument("-a", "--audio", nargs="?", const=DEFAULT_AUDIO_FORMAT, default=None, choices=["mp3", "m4a", "wav", "flac", "aac", "opus"], help="Download audio only")
-    parser.add_argument("-q", "--quality", nargs="?", const="interactive", default=None, help="Resolution format or interactive menu")
     parser.add_argument("-s", "--subtitles", nargs="?", const="es", default=None, help="Download and embed subtitles. Defaults to 'es' if used alone, or specify languages like 'en', 'pt', 'es,en' or 'all'")
     parser.add_argument("--clean", action="store_true", help="Deletes the raw video after generating the subtitled copy (requires -s)")
     parser.add_argument("--compress", action="store_true", help="Compresses the resulting video with FFmpeg (libx264) to reduce file size")
@@ -833,7 +833,7 @@ if __name__ == "__main__":
     parser.add_argument("-nc", "--no-cookies", action="store_true", help="Bypass automatic detection of cookies")
     parser.add_argument("-nh", "--no-history", action="store_true", help="Bypass recording download history in archive files")
     parser.add_argument("--no-cache", action="store_true", help="Bypass cache checking and session saving")
-    parser.add_argument("-b", "--best", action="store_true", help="Automatic mode: activates subtitles (-s), cleanup (--clean), organization (-o), rate-limit (-r), no-cache (--no-cache), and sleep interval (-si)")
+    parser.add_argument("-b", "--best", action="store_true", help="Automatic mode: activates subtitles (-s), cleanup (--clean), notify (-n), no-cache (--no-cache), rate-limit (-r), and sleep interval (-si 5)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Show native yt-dlp log output")
     args = parser.parse_args()
 
@@ -847,7 +847,7 @@ if __name__ == "__main__":
             args.ratelimit = DEFAULT_RATELIMIT
 
         if not args.sleep_interval or args.sleep_interval == DEFAULT_SLEEP_INTERVAL:
-            args.sleep_interval = 8
+            args.sleep_interval = 5
 
         print(f"{Colors.BLUE}[i]{Colors.ENDC} --best mode activated. Values applied automatically:")
         print(f"    - Subtitles: {args.subtitles}")
