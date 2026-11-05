@@ -38,6 +38,7 @@ class Colors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     MAGENTA = '\033[35m'
+    YELLOW = '\033[93m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
 
@@ -157,14 +158,22 @@ class MediaGrabber:
 
     @classmethod
     def progress_hook(cls, d):
-        """Imprime el progreso de descarga limpiando la línea con secuencias ANSI."""
-        if d['status'] == 'downloading':
-            percent = d.get('_percent_str', '0.0%').strip()
+        """Imprime el progreso de descarga en tiempo real con detalles de velocidad y ETA."""
+        status = d.get('status')
+
+        if status == 'downloading':
+            percent = d.get('_percent_str')
+            if percent:
+                percent = percent.strip()
+            else:
+                downloaded = d.get('downloaded_bytes', 0)
+                percent = cls.format_bytes(downloaded) if downloaded else "Processing..."
+
             speed = d.get('_speed_str', 'N/A').strip()
             eta = d.get('_eta_str', 'N/A').strip()
 
             total_bytes = d.get('total_bytes') or d.get('total_bytes_estimate')
-            size_str = cls.format_bytes(total_bytes)
+            size_str = cls.format_bytes(total_bytes) if total_bytes else ""
             size_info = f"| Size: {size_str}" if size_str else ""
 
             fragment_index = d.get('fragment_index')
@@ -179,7 +188,7 @@ class MediaGrabber:
             sys.stdout.write(status_line + "\033[K")
             sys.stdout.flush()
 
-        elif d['status'] == 'finished':
+        elif status == 'finished':
             sys.stdout.write("\r\033[K")
             sys.stdout.flush()
             filename = d.get('filename')
@@ -667,7 +676,11 @@ class MediaGrabber:
                     rate_msg = f" [Rate Limit: {ratelimit}]" if ratelimit else ""
                     sb_msg = " [SponsorBlock]" if sponsorblock else ""
                     sc_msg = " [Split Chapters]" if split_chapters else ""
+
                     print(f"{Colors.BLUE}[*]{Colors.ENDC} Processing and downloading {target_type} {action_type}{range_msg}{rate_msg}{sb_msg}{sc_msg} to '{os.path.basename(target_base_dir)}/' from URL: {url}")
+
+                    if time_range:
+                        print(f"{Colors.YELLOW}[i]{Colors.ENDC} Note: yt-dlp suppresses progress bars during range trimming (-tr). Please wait while the segment is processed...")
 
                 info_dict = ydl.extract_info(url, download=True)
 
